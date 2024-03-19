@@ -4,4 +4,6 @@
 	export let data: PageData;
 </script>
 
-<h1>DASHI</h1>
+<section class="grid h-full">
+	<h1>Dashboard</h1>
+</section>

@@ -1,12 +1,12 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-import type PocketBase from 'pocketbase';
+import type { YosPocketBase } from '$lib/types/yos-pocket-base';
 
 declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			pb: PocketBase;
+			pb: YosPocketBase;
 		}
 		// interface PageData {}
 		// interface PageState {}
