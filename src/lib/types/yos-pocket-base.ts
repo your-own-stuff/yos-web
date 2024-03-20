@@ -11,7 +11,7 @@ export type AsyncActionResult<T> = Promise<T>;
 
 export interface YosPocketBase extends PocketBase {
 	send<T>(path: string, options: SendOptions): Promise<T>;
-	send(path: '/rebuild-index', options: SendOptions): Promise<{ success: true }>;
+	send(path: '/rebuild-index', options: SendOptions): Promise<{ status: 'started' }>;
 
 	collection(idOrName: string): RecordService;
 	collection(idOrName: 'systemstatus'): RecordService<Systemstatus>;
