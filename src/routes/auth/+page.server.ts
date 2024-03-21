@@ -16,19 +16,13 @@ export const actions: Actions = {
 		if (!form.valid) return form;
 
 		try {
-			await pb.admins.authWithPassword(form.data.email, form.data.password);
-			redirect(307, '/admin');
-		} catch (e) {
-			if (isRedirect(e)) {
-				throw e;
-			}
-		}
+			const user = await pb
+				.collection('users')
+				.authWithPassword(form.data.email, form.data.password);
 
-		try {
-			await pb.collection('users').authWithPassword(form.data.email, form.data.password);
-			redirect(307, '/dash');
-		} catch {
-			// empty
+			user.record.isAdmin ? redirect(307, '/admin') : redirect(307, '/dash');
+		} catch (e) {
+			if (isRedirect(e)) throw e;
 		}
 
 		return setError(form, 'password', 'Invalid email or password');
