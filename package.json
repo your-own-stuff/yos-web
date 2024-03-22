@@ -41,7 +41,7 @@
     "svelte-preprocess"
   ],
   "dependencies": {
-    "bits-ui": "^0.19.7",
+    "bits-ui": "^0.20.0",
     "clsx": "^2.1.0",
     "formsnap": "^0.5.1",
     "lucide-svelte": "^0.358.0",

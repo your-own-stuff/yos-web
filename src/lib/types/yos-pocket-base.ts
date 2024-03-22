@@ -19,6 +19,15 @@ export type DataResource = {
 	updated: Date;
 };
 
+export type Users = {
+	id: string;
+	username: string;
+	email: string;
+	isAdmin: boolean;
+	created: Date;
+	updated: Date;
+};
+
 export type AsyncActionResult<T> = Promise<T>;
 
 export interface YosPocketBase extends PocketBase {
@@ -26,6 +35,7 @@ export interface YosPocketBase extends PocketBase {
 	send(path: '/rebuild-index', options: SendOptions): Promise<{ status: 'started' }>;
 
 	collection(idOrName: string): RecordService;
+	collection(idOrName: 'users'): RecordService<Users>;
 	collection(idOrName: 'systemstatus'): RecordService<Systemstatus>;
 	collection(idOrName: 'data_resources'): RecordService<DataResource>;
 }

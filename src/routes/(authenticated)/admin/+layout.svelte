@@ -11,14 +11,14 @@
 
 {#snippet link(label, href)}
 	<a
-		class="w-full py-1 text-center {$page.url.pathname.endsWith(href)
+		class="w-full py-1 text-center {$page.url.pathname.startsWith(href)
 			? activeClasses
 			: otherClasses}"
 		{href}>{label}</a
 	>
 {/snippet}
 
-<section class="space-y-10">
+<section class="grid h-full grid-rows-[auto_1fr] gap-10">
 	<div class="grid grid-cols-[auto_1fr] items-center gap-4">
 		<h1>Admin</h1>
 		<div class="grid grid-flow-col place-items-center rounded-sm bg-muted p-1 *:rounded-sm">
