@@ -8,16 +8,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	try {
 		// get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
-		event.locals.pb.authStore.isValid && event.locals.pb.authStore.isAdmin
-			? await event.locals.pb.admins.authRefresh()
-			: await event.locals.pb.collection('users').authRefresh();
+		event.locals.pb.authStore.isValid && (await event.locals.pb.collection('users').authRefresh());
 	} catch (_) {
 		// clear the auth store on failed refresh
 		event.locals.pb.authStore.clear();
 	}
 
 	if (event.url.pathname === '/') {
-		if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.isAdmin) {
+		if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model?.isAdmin) {
 			redirect(307, '/admin');
 		} else if (event.locals.pb.authStore.isValid) {
 			redirect(307, '/dash');
@@ -26,7 +24,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	}
 
-	if (event.url.pathname === '/admin' && !event.locals.pb.authStore.isAdmin) {
+	if (event.url.pathname === '/admin' && !event.locals.pb.authStore.model?.isAdmin) {
 		redirect(307, '/dash');
 	}
 

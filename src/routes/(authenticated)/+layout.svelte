@@ -19,7 +19,7 @@
 <div class="grid h-min min-h-full grid-rows-[auto_1fr]">
 	<header class="sticky top-0 z-10 bg-background bg-opacity-30 backdrop-blur-md">
 		<nav class="flex items-center justify-between p-3">
-			<span class="text-lg font-bold">YOS</span>
+			<a class="text-lg font-bold" href="/dash">YOS</a>
 			<form method="post" action="/api/logout">
 				<Button type="submit" size="icon" variant="ghost"><LogOut /></Button>
 			</form>
