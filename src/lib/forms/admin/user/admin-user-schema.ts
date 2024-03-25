@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const createUserSchema = z
+export const adminCreateUserSchema = z
 	.object({
 		username: z.string().min(1),
 		password: z.string().min(8),
@@ -12,9 +12,9 @@ export const createUserSchema = z
 		path: ['passwordConfirm']
 	});
 
-export type CreateUserSchema = typeof createUserSchema;
+export type AdminCreateUserSchema = typeof adminCreateUserSchema;
 
-export const updateUserSchema = z
+export const adminUpdateUserSchema = z
 	.object({
 		username: z.string().min(1),
 		password: z.string().min(8).nullable().default(null),
@@ -26,4 +26,4 @@ export const updateUserSchema = z
 		path: ['passwordConfirm']
 	});
 
-export type UpdateUserSchema = typeof updateUserSchema;
+export type AdminUpdateUserSchema = typeof adminUpdateUserSchema;

@@ -1,5 +1,5 @@
 import type PocketBase from 'pocketbase';
-import type { RecordService, SendOptions } from 'pocketbase';
+import type { BaseAuthStore, RecordService, SendOptions } from 'pocketbase';
 
 export type Systemstatus = {
 	id: string;
@@ -39,4 +39,8 @@ export interface YosPocketBase extends PocketBase {
 	collection(idOrName: 'users'): RecordService<Users>;
 	collection(idOrName: 'systemstatus'): RecordService<Systemstatus>;
 	collection(idOrName: 'data_resources'): RecordService<DataResource>;
+
+	authStore: BaseAuthStore & {
+		model: Users | null;
+	};
 }

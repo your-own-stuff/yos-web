@@ -1,8 +1,17 @@
 <script lang="ts">
-	import UpdateUserForm from '$lib/forms/user/update-user-form.svelte';
+	import AvatarForm from '$lib/forms/user/avatar/avatar-form.svelte';
+	import ProfileForm from '$lib/forms/user/profile/profile-form.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
-<UpdateUserForm data={data.form} />
+<section class="space-y-10">
+	<AvatarForm
+		data={data.avatarForm}
+		avatar={data.avatar}
+		action="?/update-avatar"
+		removeAction="?/remove-avatar"
+	/>
+	<ProfileForm data={data.profileForm} />
+</section>

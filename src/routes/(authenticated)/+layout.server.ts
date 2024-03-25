@@ -9,6 +9,9 @@ export const load = (async ({ locals: { pb } }) => {
 	return {
 		session: pb.authStore.exportToCookie(),
 		user,
-		image: user ? pb.getFileUrl(user, user.avatar) : null
+		avatar: {
+			src: user.avatar ? pb.getFileUrl(user, user.avatar) : null,
+			fallback: user.username.slice(0, 2)
+		}
 	};
 }) satisfies LayoutServerLoad;

@@ -1,20 +1,20 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
-	import { Checkbox } from '$lib/components/ui/checkbox';
+	import { Button } from '$lib/components/ui/button';
 	import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
 	import { toast } from 'svelte-sonner';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { createUserSchema, type CreateUserSchema } from './user-schema';
+	import { updateProfileSchema, type UpdateProfileSchema } from './profile-schema';
 
-	export let data: SuperValidated<Infer<CreateUserSchema>>;
+	export let data: SuperValidated<Infer<UpdateProfileSchema>>;
 
 	const form = superForm(data, {
-		validators: zodClient(createUserSchema),
+		validators: zodClient(updateProfileSchema),
+		resetForm: false,
 		onUpdated({ form }) {
 			if (form.valid) {
-				toast.success('User created successfully!');
+				toast.success(form.message?.success);
 			}
 		}
 	});
@@ -22,7 +22,13 @@
 	const { form: formData, enhance } = form;
 </script>
 
-<form method="post" use:enhance class="flex flex-col gap-5">
+<form
+	method="post"
+	action="?/update"
+	enctype="multipart/form-data"
+	use:enhance
+	class="flex flex-col gap-5"
+>
 	<Form.Field {form} name="username">
 		<Form.Control let:attrs>
 			<Form.Label>Username</Form.Label>
@@ -46,12 +52,7 @@
 			</Form.Control>
 		</Form.Field>
 	</div>
-	<Form.Field {form} name="isAdmin" class="flex items-center gap-3 space-y-0">
-		<Form.Control let:attrs>
-			<Checkbox {...attrs} bind:checked={$formData.isAdmin} />
-			<Form.Label>Is Admin</Form.Label>
-			<input name={attrs.name} value={$formData.isAdmin} hidden />
-		</Form.Control>
-	</Form.Field>
-	<Button class="mt-auto w-min" type="submit">Create User</Button>
+	<Button class="mt-auto w-min" type="submit">
+		<span>Update User</span>
+	</Button>
 </form>

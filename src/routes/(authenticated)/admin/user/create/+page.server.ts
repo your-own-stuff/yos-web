@@ -1,18 +1,18 @@
 import { createPbAdmin } from '$lib/create-pb-admin';
+import { adminCreateUserSchema } from '$lib/forms/admin/user/admin-user-schema';
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { createUserSchema } from '../../../../../lib/forms/user/user-schema';
 import type { PageServerLoad } from './$types';
 
 export const load = (async () => {
-	const form = await superValidate(zod(createUserSchema));
+	const form = await superValidate(zod(adminCreateUserSchema));
 
 	return { form };
 }) satisfies PageServerLoad;
 
 export const actions = {
 	default: async ({ request }) => {
-		const form = await superValidate(request, zod(createUserSchema));
+		const form = await superValidate(request, zod(adminCreateUserSchema));
 
 		if (!form.valid) {
 			return { form };

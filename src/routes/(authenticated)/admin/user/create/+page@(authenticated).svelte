@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { ArrowLeft } from 'lucide-svelte';
-	import CreateUserForm from '../../../../../lib/forms/user/create-user-form.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -13,5 +12,5 @@
 		Back to User
 	</Button>
 	<h3 class="text-2xl font-bold">Add User</h3>
-	<CreateUserForm data={data.form} />
+	<adminCreateUserSchema data={data.form} />
 </div>

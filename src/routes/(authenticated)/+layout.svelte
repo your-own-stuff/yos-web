@@ -29,8 +29,8 @@
 				<DropdownMenu.Trigger asChild let:builder>
 					<Button builders={[builder]} class="rounded-full" variant="ghost" size="icon">
 						<Avatar.Root>
-							<Avatar.Image src={data.image} alt="Avatar" />
-							<Avatar.Fallback>{data.user?.username.slice(0, 2)}</Avatar.Fallback>
+							<Avatar.Image src={data.avatar.src} alt="Avatar" />
+							<Avatar.Fallback>{data.avatar.fallback}</Avatar.Fallback>
 						</Avatar.Root>
 					</Button>
 				</DropdownMenu.Trigger>

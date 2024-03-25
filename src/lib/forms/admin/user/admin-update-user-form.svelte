@@ -6,12 +6,13 @@
 	import { toast } from 'svelte-sonner';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { updateUserSchema, type UpdateUserSchema } from './user-schema';
+	import { adminUpdateUserSchema, type AdminUpdateUserSchema } from './admin-user-schema';
 
-	export let data: SuperValidated<Infer<UpdateUserSchema>>;
+	export let action: string;
+	export let data: SuperValidated<Infer<AdminUpdateUserSchema>>;
 
 	const form = superForm(data, {
-		validators: zodClient(updateUserSchema),
+		validators: zodClient(adminUpdateUserSchema),
 		resetForm: false,
 		onUpdated({ form }) {
 			if (form.valid) {
@@ -23,7 +24,7 @@
 	const { form: formData, enhance } = form;
 </script>
 
-<form method="post" use:enhance class="flex flex-col gap-5">
+<form {action} method="post" enctype="multipart/form-data" use:enhance class="flex flex-col gap-5">
 	<Form.Field {form} name="username">
 		<Form.Control let:attrs>
 			<Form.Label>Username</Form.Label>
