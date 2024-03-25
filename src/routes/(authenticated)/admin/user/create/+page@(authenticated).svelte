@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { ArrowLeft } from 'lucide-svelte';
+	import CreateUserForm from '../../../../../lib/forms/user/create-user-form.svelte';
 	import type { PageData } from './$types';
-	import CreateUserForm from './create-user-form.svelte';
 
 	export let data: PageData;
 </script>

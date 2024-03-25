@@ -39,6 +39,11 @@
 						<DropdownMenu.Item href="/admin">Admin</DropdownMenu.Item>
 						<DropdownMenu.Separator />
 					{/if}
+					<DropdownMenu.Item href="/profile">
+						<span>Settings</span>
+						<DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut>
+					</DropdownMenu.Item>
+					<DropdownMenu.Separator />
 					<form method="post" action="/api/logout">
 						<DropdownMenu.Item asChild>
 							<Button

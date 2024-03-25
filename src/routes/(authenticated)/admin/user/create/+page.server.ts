@@ -1,7 +1,7 @@
 import { createPbAdmin } from '$lib/create-pb-admin';
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { createUserSchema } from '../user-schema';
+import { createUserSchema } from '../../../../../lib/forms/user/user-schema';
 import type { PageServerLoad } from './$types';
 
 export const load = (async () => {

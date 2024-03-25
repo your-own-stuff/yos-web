@@ -6,7 +6,7 @@
 	import { toast } from 'svelte-sonner';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { updateUserSchema, type UpdateUserSchema } from '../user-schema';
+	import { updateUserSchema, type UpdateUserSchema } from './user-schema';
 
 	export let data: SuperValidated<Infer<UpdateUserSchema>>;
 

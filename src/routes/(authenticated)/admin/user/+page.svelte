@@ -9,5 +9,5 @@
 
 <div class="container mx-auto space-y-5">
 	<Button href="/admin/user/create">Add User</Button>
-	<DataTable data={data.users} />
+	<DataTable data={data.users} currentUserId={data.user.id} />
 </div>

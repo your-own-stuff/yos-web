@@ -7,8 +7,9 @@
 	import { readable } from 'svelte/store';
 	import DataTableActions from './data-table-actions.svelte';
 	import DataTableAvatar from './data-table-avatar.svelte';
+	import DataTableYou from './data-table-you.svelte';
 
-	const { data }: { data: Users[] } = $props();
+	const { data, currentUserId }: { data: Users[]; currentUserId: string } = $props();
 
 	const table = createTable(readable(data));
 
@@ -35,6 +36,7 @@
 			header: '',
 			accessor: 'id',
 			cell: ({ value }) => {
+				if (value === currentUserId) return createRender(DataTableYou);
 				return createRender(DataTableActions, { id: value });
 			}
 		})

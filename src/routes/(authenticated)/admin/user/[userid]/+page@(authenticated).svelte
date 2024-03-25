@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
+	import UpdateUserForm from '$lib/forms/user/update-user-form.svelte';
 	import { ArrowLeft } from 'lucide-svelte';
 	import type { PageData } from './$types';
-	import UpdateUserForm from './update-user-form.svelte';
 
 	export let data: PageData;
 </script>
