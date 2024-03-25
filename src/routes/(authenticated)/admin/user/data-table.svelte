@@ -3,8 +3,10 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table';
 	import type { Users } from '$lib/types/yos-pocket-base';
-	import { Render, Subscribe, createTable } from 'svelte-headless-table';
+	import { Render, Subscribe, createRender, createTable } from 'svelte-headless-table';
 	import { readable } from 'svelte/store';
+	import DataTableActions from './data-table-actions.svelte';
+	import DataTableAvatar from './data-table-avatar.svelte';
 
 	const { data }: { data: Users[] } = $props();
 
@@ -12,8 +14,14 @@
 
 	const columns = table.createColumns([
 		table.column({
-			header: 'Id',
-			accessor: 'id'
+			header: 'Avatar',
+			accessor: (a) => a,
+			cell: ({ value }) => {
+				return createRender(DataTableAvatar, {
+					url: value.avatar,
+					fallback: value.username.slice(0, 2)
+				});
+			}
 		}),
 		table.column({
 			header: 'Username',
@@ -22,6 +30,13 @@
 		table.column({
 			header: 'Admin',
 			accessor: 'isAdmin'
+		}),
+		table.column({
+			header: '',
+			accessor: 'id',
+			cell: ({ value }) => {
+				return createRender(DataTableActions, { id: value });
+			}
 		})
 	]);
 

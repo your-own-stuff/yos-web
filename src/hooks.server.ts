@@ -15,9 +15,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (event.url.pathname === '/') {
-		if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model?.isAdmin) {
-			redirect(307, '/admin');
-		} else if (event.locals.pb.authStore.isValid) {
+		if (event.locals.pb.authStore.isValid) {
 			redirect(307, '/dash');
 		} else {
 			redirect(307, '/auth');

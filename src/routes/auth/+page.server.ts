@@ -16,11 +16,8 @@ export const actions: Actions = {
 		if (!form.valid) return form;
 
 		try {
-			const user = await pb
-				.collection('users')
-				.authWithPassword(form.data.email, form.data.password);
-
-			user.record.isAdmin ? redirect(307, '/admin') : redirect(307, '/dash');
+			await pb.collection('users').authWithPassword(form.data.email, form.data.password);
+			redirect(307, '/dash');
 		} catch (e) {
 			if (isRedirect(e)) throw e;
 		}

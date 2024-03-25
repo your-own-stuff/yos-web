@@ -22,6 +22,7 @@ export type DataResource = {
 export type Users = {
 	id: string;
 	username: string;
+	avatar: string | null;
 	email: string;
 	isAdmin: boolean;
 	created: Date;

@@ -1,7 +1,9 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
+	import * as Avatar from '$lib/components/ui/avatar';
+	import { Button } from '$lib/components/ui/button';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import { rebuilding } from '$lib/stores/index-rebuilding.svelte';
 	import { LogOut } from 'lucide-svelte';
@@ -23,9 +25,34 @@
 				<enhanced:img src="../../assets/hausi.svg" class="h-10 w-10" />
 				YOS
 			</a>
-			<form method="post" action="/api/logout">
-				<Button type="submit" size="icon" variant="ghost"><LogOut /></Button>
-			</form>
+			<DropdownMenu.Root>
+				<DropdownMenu.Trigger asChild let:builder>
+					<Button builders={[builder]} class="rounded-full" variant="ghost" size="icon">
+						<Avatar.Root>
+							<Avatar.Image src={data.image} alt="Avatar" />
+							<Avatar.Fallback>{data.user?.username.slice(0, 2)}</Avatar.Fallback>
+						</Avatar.Root>
+					</Button>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content>
+					{#if data.user?.isAdmin}
+						<DropdownMenu.Item href="/admin">Admin</DropdownMenu.Item>
+						<DropdownMenu.Separator />
+					{/if}
+					<form method="post" action="/api/logout">
+						<DropdownMenu.Item asChild>
+							<Button
+								type="submit"
+								variant="ghost"
+								class="h-min w-full justify-start px-2 py-1.5 text-sm font-normal"
+							>
+								<LogOut class="mr-2 h-4 w-4" />
+								<span>Logout</span>
+							</Button>
+						</DropdownMenu.Item>
+					</form>
+				</DropdownMenu.Content>
+			</DropdownMenu.Root>
 		</nav>
 		<Separator />
 	</header>

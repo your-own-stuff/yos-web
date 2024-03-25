@@ -5,7 +5,7 @@
 
 	const { children } = $props();
 
-	const activeClasses = 'text-foreground bg-background';
+	const activeClasses = 'text-foreground underline';
 	const otherClasses = 'opacity-50';
 </script>
 
@@ -19,9 +19,9 @@
 {/snippet}
 
 <section class="grid h-full grid-rows-[auto_1fr] gap-10">
-	<div class="grid grid-cols-[auto_1fr] items-center gap-4">
+	<div class="grid grid-cols-[auto_1fr] items-end gap-4">
 		<h1>Admin</h1>
-		<div class="grid grid-flow-col place-items-center rounded-sm bg-muted p-1 *:rounded-sm">
+		<div class="flex gap-3 *:w-min">
 			{@render link('Basics', '/admin/basics')}
 			{@render link('User', '/admin/user')}
 		</div>

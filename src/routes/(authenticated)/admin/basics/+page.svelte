@@ -7,7 +7,7 @@
 	import { toast } from 'svelte-sonner';
 </script>
 
-<section class="grid h-full auto-rows-min gap-3">
+<section class="container mx-auto grid h-full auto-rows-min gap-3">
 	<form
 		method="post"
 		use:enhance={() => {

@@ -1,5 +1,10 @@
 import type { LayoutServerLoad } from './$types';
 
 export const load = (async ({ locals: { pb } }) => {
-	return { session: pb.authStore.exportToCookie() };
+	const user = pb.authStore.model;
+	return {
+		session: pb.authStore.exportToCookie(),
+		user,
+		image: user ? pb.getFileUrl(user, user.avatar) : null
+	};
 }) satisfies LayoutServerLoad;

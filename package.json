@@ -44,7 +44,7 @@
     "bits-ui": "^0.20.0",
     "clsx": "^2.1.0",
     "formsnap": "^0.5.1",
-    "lucide-svelte": "^0.358.0",
+    "lucide-svelte": "^0.363.0",
     "mode-watcher": "^0.3.0",
     "pocketbase": "^0.21.1",
     "svelte-sonner": "^0.3.19",
