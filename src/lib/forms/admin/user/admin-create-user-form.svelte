@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import * as Form from '$lib/components/ui/form';
@@ -15,6 +16,7 @@
 		onUpdated({ form }) {
 			if (form.valid) {
 				toast.success('User created successfully!');
+				goto('/admin/user');
 			}
 		}
 	});

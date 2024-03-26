@@ -1,4 +1,3 @@
-import { createPbAdmin } from '$lib/create-pb-admin';
 import { avatarSchema } from '$lib/forms/user/avatar/avatar-schema';
 import { updateProfileSchema } from '$lib/forms/user/profile/profile-schema';
 import { error, type Actions } from '@sveltejs/kit';
@@ -35,10 +34,8 @@ export const actions: Actions = {
 			return { form };
 		}
 
-		const pbAdmin = await createPbAdmin();
-
 		try {
-			await pbAdmin.collection('users').update(userid, form.data);
+			await pb.collection('users').update(userid, form.data);
 			await pb.collection('users').authRefresh();
 			form.data.password = null;
 			form.data.passwordConfirm = null;
@@ -55,14 +52,12 @@ export const actions: Actions = {
 			return error(401, 'Unauthorized');
 		}
 
-		const pbAdmin = await createPbAdmin();
-
 		if (!form.valid) {
 			return { form };
 		}
 
 		try {
-			await pbAdmin.collection('users').update(userid, form.data);
+			await pb.collection('users').update(userid, form.data);
 			await pb.collection('users').authRefresh();
 			return message(form, { success: 'Avatar updated' });
 		} catch (error) {
@@ -77,10 +72,8 @@ export const actions: Actions = {
 			return error(401, 'Unauthorized');
 		}
 
-		const pbAdmin = await createPbAdmin();
-
 		try {
-			await pbAdmin.collection('users').update(userid, { avatar: null });
+			await pb.collection('users').update(userid, { avatar: null });
 			await pb.collection('users').authRefresh();
 			return message(form, { success: 'Avatar removed' });
 		} catch (error) {
