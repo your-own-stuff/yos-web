@@ -1,6 +1,7 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+	import Logo from '$lib/components/logo.svelte';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
@@ -22,7 +23,7 @@
 	<header class="sticky top-0 z-10 bg-background bg-opacity-30 backdrop-blur-md">
 		<nav class="flex items-center justify-between p-3">
 			<a class="flex items-end gap-1 text-lg font-bold" href="/dash">
-				<enhanced:img src="../../assets/hausi.svg" class="h-10 w-10" />
+				<Logo />
 				YOS
 			</a>
 			<DropdownMenu.Root>

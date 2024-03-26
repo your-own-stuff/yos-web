@@ -1,9 +1,9 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+	import SidebarNav from '$lib/components/sidebar-nav.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { ArrowLeft } from 'lucide-svelte';
-	import SidebarNav from './sidebar-nav.svelte';
 
 	const { children } = $props();
 
@@ -16,9 +16,9 @@
 </script>
 
 <section class="grid h-full grid-cols-[20%_1fr] grid-rows-[auto_1fr]">
-	<Button variant="link" class="col-span-full w-min px-0" href=".">
+	<Button variant="link" class="col-span-full w-min px-0" href="/">
 		<ArrowLeft size={16} class="mr-2" />
-		Back to Dashboard
+		Home
 	</Button>
 	<aside>
 		<SidebarNav items={sidebarItems} />

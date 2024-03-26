@@ -1,8 +1,8 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { FileInput } from '$lib/components/ui/file-input';
 	import * as Form from '$lib/components/ui/form';
+	import { FileInput } from '$lib/components/ui/input';
 	import { toast } from 'svelte-sonner';
 	import { fileProxy, superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';

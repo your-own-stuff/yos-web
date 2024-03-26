@@ -1,30 +1,34 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-	import { page } from '$app/stores';
+	import SidebarNav from '$lib/components/sidebar-nav.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import { ArrowLeft } from 'lucide-svelte';
 
 	const { children } = $props();
 
-	const activeClasses = 'text-foreground underline';
-	const otherClasses = 'opacity-50';
+	const sidebarItems = [
+		{
+			title: 'General',
+			href: '/admin/general'
+		},
+		{
+			title: 'User',
+			href: '/admin/user'
+		}
+	];
 </script>
 
-{#snippet link(label, href)}
-	<a
-		class="w-full py-1 text-center {$page.url.pathname.startsWith(href)
-			? activeClasses
-			: otherClasses}"
-		{href}>{label}</a
-	>
-{/snippet}
-
-<section class="grid h-full grid-rows-[auto_1fr] gap-10">
-	<div class="grid grid-cols-[auto_1fr] items-end gap-4">
-		<h1>Admin</h1>
-		<div class="flex gap-3 *:w-min">
-			{@render link('Basics', '/admin/basics')}
-			{@render link('User', '/admin/user')}
-		</div>
+<section class="grid h-full grid-cols-[20%_1fr] grid-rows-[auto_1fr]">
+	<Button variant="link" class="col-span-full w-min px-0" href="/">
+		<ArrowLeft size={16} class="mr-2" />
+		Home
+	</Button>
+	<aside>
+		<h3 class="text-2xl font-bold">Admin</h3>
+		<SidebarNav items={sidebarItems} />
+	</aside>
+	<div class="container mx-auto px-4">
+		{@render children()}
 	</div>
-	{@render children()}
 </section>
