@@ -11,5 +11,5 @@ export const load = (async ({ data }) => {
 		.collection('systemstatus')
 		.getFirstListItem(pb.filter("name = 'index_rebuilding'"));
 
-	return { indexRebuilding: { id: res.id, rebuilding: res.value === 'true' }, pb };
+	return { ...data, indexRebuilding: { id: res.id, rebuilding: res.value === 'true' }, pb };
 }) satisfies LayoutLoad;

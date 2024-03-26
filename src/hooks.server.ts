@@ -4,7 +4,6 @@ import { redirect, type Handle } from '@sveltejs/kit';
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.pb = createPb();
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
-	event.locals.pb.authStore.model;
 
 	try {
 		// get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
@@ -15,9 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (event.url.pathname === '/') {
-		if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model?.isAdmin) {
-			redirect(307, '/admin');
-		} else if (event.locals.pb.authStore.isValid) {
+		if (event.locals.pb.authStore.isValid) {
 			redirect(307, '/dash');
 		} else {
 			redirect(307, '/auth');
