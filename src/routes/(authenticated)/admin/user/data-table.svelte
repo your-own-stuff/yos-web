@@ -2,6 +2,7 @@
 
 <script lang="ts">
 	import type { Users } from '$lib/types/yos-pocket-base';
+	import clsx from 'clsx';
 	import { Render, Subscribe, createRender, createTable } from 'svelte-headless-table';
 	import { readable } from 'svelte/store';
 	import DataTableActions from './data-table-actions.svelte';
@@ -32,6 +33,7 @@
 			accessor: 'isAdmin'
 		}),
 		table.column({
+			id: 'action',
 			header: '',
 			accessor: 'id',
 			cell: ({ value }) => {
@@ -49,7 +51,7 @@
 		<thead>
 			{#each $headerRows as headerRow (headerRow.id)}
 				<Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
-					<tr {...rowAttrs}>
+					<tr {...rowAttrs} class="border-b border-surface-600">
 						{#each headerRow.cells as cell (cell.id)}
 							<Subscribe attrs={cell.attrs()} let:attrs>
 								<th class="p-2 text-left" {...attrs}>
@@ -66,11 +68,11 @@
 				<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
 					<tr
 						{...rowAttrs}
-						class="border-b border-surface-600 transition-colors last:border-b-0 hover:bg-surface-700"
+						class="border-b border-surface-600 transition-colors last:border-b-0 hover:bg-neutral-500 hover:bg-opacity-50"
 					>
 						{#each row.cells as cell (cell.id)}
 							<Subscribe attrs={cell.attrs()} let:attrs>
-								<td class="p-2" {...attrs}>
+								<td class={clsx('p-2', cell.id === 'action' && 'text-right')} {...attrs}>
 									<Render of={cell.render()} />
 								</td>
 							</Subscribe>
