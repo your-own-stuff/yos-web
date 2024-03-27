@@ -19,7 +19,7 @@
 			};
 		}}
 	>
-		<SubmitButton class="variant-outline btn" isLoading={rebuilding.indexRebuilding}>
+		<SubmitButton class="variant-filled-primary btn" isLoading={rebuilding.indexRebuilding}>
 			Generate Index
 		</SubmitButton>
 	</form>

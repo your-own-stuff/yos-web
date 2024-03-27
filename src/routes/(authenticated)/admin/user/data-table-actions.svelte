@@ -19,14 +19,7 @@
 		<Ellipsis />
 	</button>
 	<aside data-popup="user-{id}-popup">
-		<div class="variant-filled-surface btn-group-vertical">
-			<!-- <DropdownMenu.Group>
-				<DropdownMenu.Label>Actions</DropdownMenu.Label>
-				<DropdownMenu.Item on:click={() => navigator.clipboard.writeText(id)}>
-					Copy user ID
-				</DropdownMenu.Item>
-			</DropdownMenu.Group>
-			<DropdownMenu.Separator /> -->
+		<div class="variant-glass-surface btn-group-vertical">
 			<a href="/admin/user/{id}">Edit User</a>
 		</div>
 	</aside>

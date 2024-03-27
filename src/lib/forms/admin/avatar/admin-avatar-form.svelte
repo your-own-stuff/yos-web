@@ -64,7 +64,7 @@
 			<FieldErrors />
 		</Control>
 	</Field>
-	<button disabled={$tainted === undefined} type="submit" class="variant-filled-primary btn w-min"
-		>Update Avatar</button
-	>
+	<button disabled={$tainted === undefined} type="submit" class="variant-filled-primary btn w-min">
+		Update Avatar
+	</button>
 </form>

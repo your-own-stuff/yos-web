@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 
 	import { cn } from '$lib/utils';
+	import clsx from 'clsx';
 	import { cubicInOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 
@@ -21,16 +22,9 @@
 		{@const isActive = $page.url.pathname === item.href}
 		<a
 			href={item.href}
-			class={cn("btn variant-ghost", !isActive && 'hover:underline', 'relative justify-start hover:bg-transparent')}
+			class={clsx('variant-ghost btn justify-start', isActive && '!variant-ghost-primary')}
 			data-sveltekit-noscroll
 		>
-			{#if isActive}
-				<div
-					class="absolute inset-0 rounded-md bg-muted"
-					in:send={{ key: 'active-sidebar-tab' }}
-					out:receive={{ key: 'active-sidebar-tab' }}
-				/>
-			{/if}
 			<div class="relative">
 				{item.title}
 			</div>

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.anchor {
+	@apply text-base-token;
+}
+
+:is(.dark .anchor) {
+	@apply text-inherit;
+}
+
 div:has(> [data-fs-field-errors]) {
 	@apply pb-6;
 }

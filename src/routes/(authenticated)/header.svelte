@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Logo from '$lib/components/logo.svelte';
-	import { Avatar, popup, type PopupSettings } from '@skeletonlabs/skeleton';
+	import { Avatar, LightSwitch, popup, type PopupSettings } from '@skeletonlabs/skeleton';
 
 	export let avatar: { src: string | undefined; fallback: string };
 	export let showAdmin = false;
@@ -13,11 +13,12 @@
 	};
 </script>
 
-<nav class="flex items-center justify-between p-3">
-	<a class="flex items-end gap-1 text-lg font-bold" href="/dash">
+<nav class="grid grid-cols-[1fr_auto_auto] items-center gap-4 p-3">
+	<a class="flex w-min items-end gap-1 text-lg font-bold" href="/dash">
 		<Logo />
 		YOS
 	</a>
+	<LightSwitch />
 	<button use:popup={popupSettings}>
 		<Avatar
 			src={avatar.src}

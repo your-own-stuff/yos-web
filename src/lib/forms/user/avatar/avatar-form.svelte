@@ -52,7 +52,7 @@
 					<button
 						formaction={removeAction}
 						type="submit"
-						class="variant-filled btn w-min"
+						class="variant-filled-error btn btn-sm w-min"
 						on:click={() => {
 							preview = undefined;
 						}}
@@ -64,7 +64,7 @@
 			<FieldErrors />
 		</Control>
 	</Field>
-	<button disabled={$tainted === undefined} type="submit" class="variant-filled btn w-min"
-		>Update Avatar</button
-	>
+	<button disabled={$tainted === undefined} type="submit" class="variant-filled-primary btn w-min">
+		Update Avatar
+	</button>
 </form>
