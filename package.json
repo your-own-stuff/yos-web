@@ -12,11 +12,15 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@skeletonlabs/skeleton": "^2.9.0",
+		"@skeletonlabs/tw-plugin": "^0.3.1",
 		"@sveltejs/adapter-node": "^5.0.1",
 		"@sveltejs/enhanced-img": "^0.1.9",
 		"@sveltejs/kit": "^2.5.4",
 		"@sveltejs/vite-plugin-svelte": "^3.0.2",
+		"@tailwindcss/forms": "^0.5.7",
 		"@types/eslint": "^8.56.6",
+		"@types/node": "^20.11.30",
 		"@typescript-eslint/eslint-plugin": "^7.4.0",
 		"@typescript-eslint/parser": "^7.4.0",
 		"autoprefixer": "^10.4.19",
@@ -41,16 +45,25 @@
 		"svelte-preprocess"
 	],
 	"dependencies": {
-		"bits-ui": "^0.20.1",
+		"@floating-ui/dom": "^1.6.3",
 		"clsx": "^2.1.0",
 		"formsnap": "^0.5.1",
 		"lucide-svelte": "^0.363.0",
-		"mode-watcher": "^0.3.0",
 		"pocketbase": "^0.21.1",
-		"svelte-sonner": "^0.3.19",
 		"sveltekit-superforms": "^2.11.0",
 		"tailwind-merge": "^2.2.2",
 		"tailwind-variants": "^0.2.1",
 		"zod": "^3.22.4"
+	},
+	"overrides": {
+		"svelte-headless-table": {
+			"svelte": "5.0.0-next.85"
+		},
+		"@skeletonlabs/skeleton": {
+			"svelte": "5.0.0-next.85"
+		},
+		"formsnap": {
+			"svelte": "5.0.0-next.85"
+		}
 	}
 }

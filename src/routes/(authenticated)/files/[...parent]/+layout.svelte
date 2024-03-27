@@ -1,12 +1,9 @@
 <script lang="ts">
-	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
-	import type { LayoutData } from './$types';
-
-	export let data: LayoutData;
+	// export let data: LayoutData;
 </script>
 
 <section class="grid grid-rows-[auto_1fr] gap-6">
-	<Breadcrumb.Root>
+	<!-- <Breadcrumb.Root>
 		<Breadcrumb.List>
 			<Breadcrumb.Item>
 				<Breadcrumb.Link href="/dash">Dashboard</Breadcrumb.Link>
@@ -21,6 +18,6 @@
 				{/if}
 			{/each}
 		</Breadcrumb.List>
-	</Breadcrumb.Root>
+	</Breadcrumb.Root> -->
 	<slot />
 </section>

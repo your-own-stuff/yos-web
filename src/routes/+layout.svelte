@@ -1,9 +1,12 @@
 <script>
-	import { Toaster } from '$lib/components/ui/sonner';
-	import { ModeWatcher } from 'mode-watcher';
+	import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+	import { Toast, initializeStores, storePopup } from '@skeletonlabs/skeleton';
 	import '../app.pcss';
+
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+			
+	initializeStores();
 </script>
 
-<ModeWatcher />
-<Toaster />
+<Toast />
 <slot />

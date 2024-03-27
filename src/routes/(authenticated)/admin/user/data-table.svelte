@@ -1,7 +1,6 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-	import * as Table from '$lib/components/ui/table';
 	import type { Users } from '$lib/types/yos-pocket-base';
 	import { Render, Subscribe, createRender, createTable } from 'svelte-headless-table';
 	import { readable } from 'svelte/store';
@@ -19,7 +18,7 @@
 			accessor: (a) => a,
 			cell: ({ value }) => {
 				return createRender(DataTableAvatar, {
-					url: value.avatar,
+					url: value.avatar ?? undefined,
 					fallback: value.username.slice(0, 2)
 				});
 			}
@@ -45,37 +44,40 @@
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs } = table.createViewModel(columns);
 </script>
 
-<div class="rounded-md border">
-	<Table.Root {...$tableAttrs}>
-		<Table.Header>
-			{#each $headerRows as headerRow}
-				<Subscribe rowAttrs={headerRow.attrs()}>
-					<Table.Row>
+<div class="box-border overflow-hidden border border-surface-600 rounded-container-token">
+	<table {...$tableAttrs} class="w-full">
+		<thead>
+			{#each $headerRows as headerRow (headerRow.id)}
+				<Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
+					<tr {...rowAttrs}>
 						{#each headerRow.cells as cell (cell.id)}
-							<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()}>
-								<Table.Head {...attrs}>
+							<Subscribe attrs={cell.attrs()} let:attrs>
+								<th class="p-2 text-left" {...attrs}>
 									<Render of={cell.render()} />
-								</Table.Head>
+								</th>
 							</Subscribe>
 						{/each}
-					</Table.Row>
+					</tr>
 				</Subscribe>
 			{/each}
-		</Table.Header>
-		<Table.Body {...$tableBodyAttrs}>
+		</thead>
+		<tbody {...$tableBodyAttrs}>
 			{#each $pageRows as row (row.id)}
 				<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-					<Table.Row {...rowAttrs}>
+					<tr
+						{...rowAttrs}
+						class="border-b border-surface-600 transition-colors last:border-b-0 hover:bg-surface-700"
+					>
 						{#each row.cells as cell (cell.id)}
 							<Subscribe attrs={cell.attrs()} let:attrs>
-								<Table.Cell {...attrs}>
+								<td class="p-2" {...attrs}>
 									<Render of={cell.render()} />
-								</Table.Cell>
+								</td>
 							</Subscribe>
 						{/each}
-					</Table.Row>
+					</tr>
 				</Subscribe>
 			{/each}
-		</Table.Body>
-	</Table.Root>
+		</tbody>
+	</table>
 </div>

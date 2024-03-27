@@ -2,7 +2,6 @@
 
 <script lang="ts">
 	import SidebarNav from '$lib/components/sidebar-nav.svelte';
-	import { Button } from '$lib/components/ui/button';
 	import { ArrowLeft } from 'lucide-svelte';
 
 	const { children } = $props();
@@ -19,12 +18,12 @@
 	];
 </script>
 
-<section class="grid h-full grid-cols-[20%_1fr] grid-rows-[auto_1fr]">
-	<Button variant="link" class="col-span-full w-min px-0" href="/">
+<section class="grid h-full grid-cols-[20%_1fr] grid-rows-[auto_1fr] gap-y-5">
+	<a class="anchor col-span-full flex w-min items-center px-0" href="/">
 		<ArrowLeft size={16} class="mr-2" />
 		Home
-	</Button>
-	<aside>
+	</a>
+	<aside class="space-y-3">
 		<h3 class="text-2xl font-bold">Admin</h3>
 		<SidebarNav items={sidebarItems} />
 	</aside>
