@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
-	import { toast } from 'svelte-sonner';
+	import { getToastStore } from '@skeletonlabs/skeleton';
+	import { Control, Field, FieldErrors, Label } from 'formsnap';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { updateProfileSchema, type UpdateProfileSchema } from './profile-schema';
+
+	const toast = getToastStore();
 
 	export let data: SuperValidated<Infer<UpdateProfileSchema>>;
 
@@ -14,7 +14,7 @@
 		resetForm: false,
 		onUpdated({ form }) {
 			if (form.valid) {
-				toast.success(form.message?.success);
+				toast.trigger({ message: form.message?.success });
 			}
 		}
 	});
@@ -22,37 +22,37 @@
 	const { form: formData, enhance } = form;
 </script>
 
-<form
-	method="post"
-	action="?/update"
-	enctype="multipart/form-data"
-	use:enhance
-	class="flex flex-col gap-5"
->
-	<Form.Field {form} name="username">
-		<Form.Control let:attrs>
-			<Form.Label>Username</Form.Label>
-			<Input {...attrs} bind:value={$formData.username} />
-			<Form.FieldErrors />
-		</Form.Control>
-	</Form.Field>
+<form method="post" action="?/update" use:enhance class="flex flex-col gap-5">
+	<Field {form} name="username">
+		<Control let:attrs>
+			<div>
+				<Label>Username</Label>
+				<input class="input" {...attrs} bind:value={$formData.username} />
+				<FieldErrors />
+			</div>
+		</Control>
+	</Field>
 	<div class="grid grid-cols-2 gap-5">
-		<Form.Field {form} name="password">
-			<Form.Control let:attrs>
-				<Form.Label>Password</Form.Label>
-				<Input type="password" {...attrs} bind:value={$formData.password} />
-				<Form.FieldErrors />
-			</Form.Control>
-		</Form.Field>
-		<Form.Field {form} name="passwordConfirm">
-			<Form.Control let:attrs>
-				<Form.Label>Confirm Password</Form.Label>
-				<Input type="password" {...attrs} bind:value={$formData.passwordConfirm} />
-				<Form.FieldErrors />
-			</Form.Control>
-		</Form.Field>
+		<Field {form} name="password">
+			<Control let:attrs>
+				<div>
+					<Label>Password</Label>
+					<input class="input" type="password" {...attrs} bind:value={$formData.password} />
+					<FieldErrors />
+				</div>
+			</Control>
+		</Field>
+		<Field {form} name="passwordConfirm">
+			<Control let:attrs>
+				<div>
+					<Label>Confirm Password</Label>
+					<input class="input" type="password" {...attrs} bind:value={$formData.passwordConfirm} />
+					<FieldErrors />
+				</div>
+			</Control>
+		</Field>
 	</div>
-	<Button class="mt-auto w-min" type="submit">
+	<button class="variant-filled-primary btn w-min" type="submit">
 		<span>Update User</span>
-	</Button>
+	</button>
 </form>

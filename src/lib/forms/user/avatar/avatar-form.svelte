@@ -1,24 +1,23 @@
 <script lang="ts">
-	import * as Avatar from '$lib/components/ui/avatar';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import * as Form from '$lib/components/ui/form';
-	import { FileInput } from '$lib/components/ui/input';
-	import { toast } from 'svelte-sonner';
+	import { Avatar, getToastStore } from '@skeletonlabs/skeleton';
+	import { Control, Field, FieldErrors, Label } from 'formsnap';
 	import { fileProxy, superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { avatarSchema, type AvatarSchema } from './avatar-schema';
 
+	const toast = getToastStore();
+
 	export let action: string;
 	export let removeAction: string;
 	export let data: SuperValidated<Infer<AvatarSchema>>;
-	export let avatar: { src: string | null; fallback: string };
+	export let avatar: { src: string | undefined; fallback: string };
 
 	const form = superForm(data, {
 		validators: zodClient(avatarSchema),
 		resetForm: false,
 		onUpdated({ form }) {
 			if (form.valid) {
-				toast.success(form.message?.success);
+				toast.trigger({ message: form.message?.success });
 			}
 		}
 	});
@@ -30,16 +29,14 @@
 </script>
 
 <form {action} method="post" enctype="multipart/form-data" class="flex flex-col gap-5" use:enhance>
-	<Form.Field {form} name="avatar">
-		<Form.Control let:attrs>
-			<Form.Label>Avatar</Form.Label>
+	<Field {form} name="avatar">
+		<Control let:attrs>
+			<Label>Avatar</Label>
 			<div class="grid grid-cols-[auto_1fr] items-center gap-5">
-				<Avatar.Root class="h-20 w-20">
-					<Avatar.Image src={preview} />
-					<Avatar.Fallback>{avatar.fallback}</Avatar.Fallback>
-				</Avatar.Root>
+				<Avatar src={preview} initials={avatar.fallback} class="h-20 w-20" />
 				<div class="flex flex-col gap-2">
-					<FileInput
+					<input
+						class="input w-min"
 						type="file"
 						accept="image/*"
 						bind:files={$avatarProxy}
@@ -52,22 +49,22 @@
 					}}
 						{...attrs}
 					/>
-					<Button
+					<button
 						formaction={removeAction}
-						size="sm"
-						variant="destructive"
 						type="submit"
-						class="w-min"
+						class="variant-filled-error btn btn-sm w-min"
 						on:click={() => {
-							preview = null;
+							preview = undefined;
 						}}
 					>
 						Remove Avatar
-					</Button>
+					</button>
 				</div>
 			</div>
-			<Form.FieldErrors />
-		</Form.Control>
-	</Form.Field>
-	<Button disabled={$tainted === undefined} type="submit" class="w-min">Update Avatar</Button>
+			<FieldErrors />
+		</Control>
+	</Field>
+	<button disabled={$tainted === undefined} type="submit" class="variant-filled-primary btn w-min">
+		Update Avatar
+	</button>
 </form>

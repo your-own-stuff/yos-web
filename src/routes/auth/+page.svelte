@@ -7,7 +7,7 @@
 
 <section class="grid h-full place-items-center">
 	<div class="container mx-auto max-w-md space-y-10">
-		<h1>Sign In</h1>
+		<h1 class="h1">Sign In</h1>
 		<LoginForm data={data.form} />
 	</div>
 </section>

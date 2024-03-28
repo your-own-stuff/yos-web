@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import { Checkbox } from '$lib/components/ui/checkbox';
-	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
-	import { toast } from 'svelte-sonner';
+	import { getToastStore } from '@skeletonlabs/skeleton';
+	import { Control, Field, FieldErrors, Label } from 'formsnap';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { adminCreateUserSchema, type AdminCreateUserSchema } from './admin-user-schema';
+
+	const toast = getToastStore();
 
 	export let data: SuperValidated<Infer<AdminCreateUserSchema>>;
 
@@ -15,7 +14,7 @@
 		validators: zodClient(adminCreateUserSchema),
 		onUpdated({ form }) {
 			if (form.valid) {
-				toast.success('User created successfully!');
+				toast.trigger({ message: 'User created successfully!' });
 				goto('/admin/user');
 			}
 		}
@@ -25,35 +24,43 @@
 </script>
 
 <form method="post" use:enhance class="flex flex-col gap-5">
-	<Form.Field {form} name="username">
-		<Form.Control let:attrs>
-			<Form.Label>Username</Form.Label>
-			<Input {...attrs} bind:value={$formData.username} />
-			<Form.FieldErrors />
-		</Form.Control>
-	</Form.Field>
+	<Field {form} name="username">
+		<Control let:attrs>
+			<div>
+				<Label>Username</Label>
+				<input class="input" {...attrs} bind:value={$formData.username} />
+				<FieldErrors />
+			</div>
+		</Control>
+	</Field>
 	<div class="grid grid-cols-2 gap-5">
-		<Form.Field {form} name="password">
-			<Form.Control let:attrs>
-				<Form.Label>Password</Form.Label>
-				<Input type="password" {...attrs} bind:value={$formData.password} />
-				<Form.FieldErrors />
-			</Form.Control>
-		</Form.Field>
-		<Form.Field {form} name="passwordConfirm">
-			<Form.Control let:attrs>
-				<Form.Label>Confirm Password</Form.Label>
-				<Input type="password" {...attrs} bind:value={$formData.passwordConfirm} />
-				<Form.FieldErrors />
-			</Form.Control>
-		</Form.Field>
+		<Field {form} name="password">
+			<Control let:attrs>
+				<div>
+					<Label>Password</Label>
+					<input class="input" type="password" {...attrs} bind:value={$formData.password} />
+					<FieldErrors />
+				</div>
+			</Control>
+		</Field>
+		<Field {form} name="passwordConfirm">
+			<Control let:attrs>
+				<div>
+					<Label>Confirm Password</Label>
+					<input class="input" type="password" {...attrs} bind:value={$formData.passwordConfirm} />
+					<FieldErrors />
+				</div>
+			</Control>
+		</Field>
 	</div>
-	<Form.Field {form} name="isAdmin" class="flex items-center gap-3 space-y-0">
-		<Form.Control let:attrs>
-			<Checkbox {...attrs} bind:checked={$formData.isAdmin} />
-			<Form.Label>Is Admin</Form.Label>
-			<input name={attrs.name} value={$formData.isAdmin} hidden />
-		</Form.Control>
-	</Form.Field>
-	<Button class="mt-auto w-min" type="submit">Create User</Button>
+	<Field {form} name="isAdmin">
+		<Control let:attrs>
+			<div class="flex items-center gap-3 space-y-0">
+				<input type="checkbox" class="input checkbox" {...attrs} bind:checked={$formData.isAdmin} />
+				<Label>Is Admin</Label>
+				<input name={attrs.name} value={$formData.isAdmin} hidden />
+			</div>
+		</Control>
+	</Field>
+	<button class="variant-filled-primary btn mt-auto w-min" type="submit">Create User</button>
 </form>
