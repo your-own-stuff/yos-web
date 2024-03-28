@@ -55,15 +55,11 @@
 		"tailwind-variants": "^0.2.1",
 		"zod": "^3.22.4"
 	},
-	"overrides": {
-		"svelte-headless-table": {
-			"svelte": "5.0.0-next.85"
-		},
-		"@skeletonlabs/skeleton": {
-			"svelte": "5.0.0-next.85"
-		},
-		"formsnap": {
-			"svelte": "5.0.0-next.85"
+	"pnpm": {
+		"peerDependencyRules": {
+			"allowedVersions": {
+				"svelte": "5.0.0-next.85"
+			}
 		}
 	}
 }

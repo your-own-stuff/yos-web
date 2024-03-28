@@ -4,9 +4,9 @@
 	import '../app.pcss';
 
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
-			
+
 	initializeStores();
 </script>
 
-<Toast />
+<Toast position="br" />
 <slot />
