@@ -13,12 +13,13 @@
 	};
 </script>
 
-<nav class="grid grid-cols-[1fr_auto_auto] items-center gap-4 p-3">
+<nav
+	class="grid grid-cols-[1fr_auto_auto] items-center gap-4 border-b border-neutral-500 border-opacity-10 p-3"
+>
 	<a class="flex w-min items-end gap-1 text-lg font-bold" href="/dash">
 		<Logo />
 		YOS
 	</a>
-	<LightSwitch />
 	<button use:popup={popupSettings}>
 		<Avatar
 			src={avatar.src}
@@ -29,12 +30,15 @@
 	</button>
 	<aside data-popup="popupAvatar">
 		<div class="variant-filled-surface btn-group-vertical">
+			<div class="flex justify-center py-2">
+				<LightSwitch />
+			</div>
 			{#if showAdmin}
-				<a id="admin" href="/admin">Admin</a>
+				<a href="/admin">Admin</a>
 			{/if}
-			<a id="admin" href="/profile">Profile</a>
+			<a href="/profile">Profile</a>
 			<form action="/api/logout" method="post">
-				<button id="logout" type="submit">Logout</button>
+				<button type="submit">Logout</button>
 			</form>
 		</div>
 	</aside>

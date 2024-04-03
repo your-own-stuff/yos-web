@@ -1,23 +1,17 @@
 <svelte:options runes={true} />
 
-<script lang="ts">
-	import { page } from '$app/stores';
-
-	import { cn } from '$lib/utils';
-	import clsx from 'clsx';
-	import { cubicInOut } from 'svelte/easing';
-	import { crossfade } from 'svelte/transition';
-
-	const { items, class: className }: { items: { title: string; href: string }[]; class?: string } =
-		$props();
-
-	const [send, receive] = crossfade({
-		duration: 250,
-		easing: cubicInOut
-	});
+<script context="module" lang="ts">
+	export type SidebarItem = { title: string; href: string };
 </script>
 
-<nav class={cn('flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1', className)}>
+<script lang="ts">
+	import { page } from '$app/stores';
+	import clsx from 'clsx';
+
+	const { items, class: className }: { items: SidebarItem[]; class?: string } = $props();
+</script>
+
+<nav class={clsx('flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1', className)}>
 	{#each items as item}
 		{@const isActive = $page.url.pathname === item.href}
 		<a
