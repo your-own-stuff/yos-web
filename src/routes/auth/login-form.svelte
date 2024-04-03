@@ -1,6 +1,5 @@
 <script lang="ts">
-	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
+	import { Control, Field, FieldErrors, Label } from 'formsnap';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { loginSchema, type LoginSchema } from './schema';
@@ -13,19 +12,23 @@
 	const { form: formData, enhance } = form;
 </script>
 
-<form method="post" use:enhance class="space-y-4">
-	<Form.Field {form} name="email">
-		<Form.Control let:attrs>
-			<Form.Label>Email</Form.Label>
-			<Input {...attrs} bind:value={$formData.email} />
-		</Form.Control>
-	</Form.Field>
-	<Form.Field {form} name="password">
-		<Form.Control let:attrs>
-			<Form.Label>Password</Form.Label>
-			<Input {...attrs} type="password" bind:value={$formData.password} />
-			<Form.FieldErrors />
-		</Form.Control>
-	</Form.Field>
-	<Form.Button>Continue</Form.Button>
+<form method="post" use:enhance class="space-y-5">
+	<Field {form} name="email">
+		<Control let:attrs>
+			<div>
+				<Label>Email</Label>
+				<input class="input" {...attrs} bind:value={$formData.email} />
+			</div>
+		</Control>
+	</Field>
+	<Field {form} name="password">
+		<Control let:attrs>
+			<div>
+				<Label>Password</Label>
+				<input class="input" {...attrs} type="password" bind:value={$formData.password} />
+				<FieldErrors class="absolute" />
+			</div>
+		</Control>
+	</Field>
+	<button class="variant-filled-primary btn">Continue</button>
 </form>

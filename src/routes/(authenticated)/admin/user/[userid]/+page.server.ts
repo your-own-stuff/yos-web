@@ -16,7 +16,7 @@ export const load = (async ({ locals: { pb }, params: { userid } }) => {
 	const updateAvatar = await superValidate(zod(adminAvatarSchema));
 
 	const userAvatar = {
-		src: user.avatar ? pb.getFileUrl(user, user.avatar) : null,
+		src: user.avatar ? pb.getFileUrl(user, user.avatar) : undefined,
 		fallback: user.username.slice(0, 2)
 	};
 
